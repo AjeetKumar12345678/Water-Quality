@@ -1,6 +1,7 @@
 streamlit
 numpy
-pandas
+scipy
+networkx
 scikit-fuzzy
 langchain
 langchain-openai
