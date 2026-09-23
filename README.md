@@ -289,26 +289,10 @@ After starting the application, open the Streamlit URL shown in the terminal.
 8. Google Gemini generates an AI-based analysis report.
 9. Read the generated recommendations.
 
-The application provides sliders for pH, turbidity, and TDS and processes them when the Run Water Assessment button is selected.
-
+The application provides sliders for pH, turbidity, and TDS and processes them when the Run Water Assessment button is selected
 ---
-
-📸 Screenshots
-
-Add your project screenshots here after running the application.
-
-Home Page
-
-![Home Page](screenshots/home.png)
-
 Water Quality Assessment Result
-
-![Assessment Result](screenshots/result.png)
-
 AI Expert Analysis Report
-
-![AI Analysis Report](screenshots/ai-report.png)
-
 «Create a "screenshots" folder in the repository and place the corresponding screenshots inside it.»
 
 ---
