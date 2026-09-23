@@ -19,7 +19,10 @@ st.markdown("Assess water safety using **Fuzzy Logic** for deterministic scoring
 
 # --- SIDEBAR: CONFIGURATION ---
 st.sidebar.header("Configuration")
-api_key = st.sidebar.text_input("Enter OpenAI API Key", type="password")
+
+# Automatically check Streamlit Secrets first, otherwise provide the text input fallback
+default_key = st.secrets.get("OPENAI_API_KEY", "") if "OPENAI_API_KEY" in st.secrets else ""
+api_key = st.sidebar.text_input("OpenAI API Key", value=default_key, type="password")
 
 st.sidebar.markdown("---")
 st.sidebar.info(
@@ -99,7 +102,7 @@ with col3:
 
 if st.button("Run Water Assessment", type="primary"):
     if not api_key:
-        st.error("Please enter your OpenAI API Key in the sidebar to proceed with LangChain analysis.")
+        st.error("Please enter your OpenAI API Key in the sidebar or configure it in Streamlit Secrets.")
     else:
         with st.spinner("Calculating fuzzy logic index and generating LLM report..."):
             # 1. Calculate Fuzzy Score
