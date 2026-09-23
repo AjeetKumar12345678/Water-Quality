@@ -119,8 +119,8 @@ if st.button("Run Water Assessment", type="primary"):
 
             # 2. LangChain + Google Gemini Integration (Free)
             try:
-                # Updated to use gemini-2.5-flash
-                llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", google_api_key=api_key, temperature=0.3)
+                # Updated to use gemini-3.5-flash
+                llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", google_api_key=api_key, temperature=0.3)
                 
                 prompt_template = ChatPromptTemplate.from_messages([
                     ("system", "You are an expert environmental scientist and water sanitation specialist."),
