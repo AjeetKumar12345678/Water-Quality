@@ -17,12 +17,16 @@ st.set_page_config(
 st.title("💧 AI-Powered Water Quality Assessment System")
 st.markdown("Assess water safety using **Fuzzy Logic** for deterministic scoring and **LangChain (LLM)** for intelligent expert recommendations.")
 
-# --- SIDEBAR: CONFIGURATION ---
+# --- SIDEBAR: SECURE CONFIGURATION ---
 st.sidebar.header("Configuration")
 
-# Automatically check Streamlit Secrets first, otherwise provide the text input fallback
-default_key = st.secrets.get("OPENAI_API_KEY", "") if "OPENAI_API_KEY" in st.secrets else ""
-api_key = st.sidebar.text_input("OpenAI API Key", value=default_key, type="password")
+# Securely load API key from Streamlit Secrets without exposing it in a text box
+if "OPENAI_API_KEY" in st.secrets:
+    api_key = st.secrets["OPENAI_API_KEY"]
+    st.sidebar.success("🔑 System Ready (API Key loaded securely)")
+else:
+    # Fallback text box ONLY if secrets aren't configured (e.g., local development)
+    api_key = st.sidebar.text_input("Enter OpenAI API Key", type="password")
 
 st.sidebar.markdown("---")
 st.sidebar.info(
@@ -85,7 +89,6 @@ def compute_fuzzy_wqi(pH_val, turb_val, tds_val):
         wqi_sim.compute()
         score = wqi_sim.output['wqi']
     except Exception:
-        # Fallback if crisp inputs fall outside standard rule triggers
         score = 50.0 
 
     return score
@@ -102,7 +105,7 @@ with col3:
 
 if st.button("Run Water Assessment", type="primary"):
     if not api_key:
-        st.error("Please enter your OpenAI API Key in the sidebar or configure it in Streamlit Secrets.")
+        st.error("API Key is missing. Please configure it in Streamlit Cloud Secrets.")
     else:
         with st.spinner("Calculating fuzzy logic index and generating LLM report..."):
             # 1. Calculate Fuzzy Score
